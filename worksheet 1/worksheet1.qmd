@@ -1,0 +1,99 @@
+---
+title: "MTH208: Worksheet 1"
+format: 
+  pdf:
+    documentclass: article
+editor: visual
+geometry: margin=1in
+header-includes:
+   - \usepackage{amsmath, amssymb, setspace}
+   - \onehalfspacing
+   - \usepackage{etoolbox} 
+   - \makeatletter 
+   - \preto{\@verbatim}{\topsep=3pt \partopsep=3pt } 
+   - \makeatother
+---
+
+\vspace{-2cm}
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  strip.white = TRUE
+)
+```
+
+## Introduction to R
+
+R is a statistical coding language made for and by statisticians. We will be using R predominantly in this course as well as throughout your degree. It is thus [absolutely crucial]{.underline} that you invest in getting familiar with the language.
+
+The machines in the lab all have R and RStudio already installed. However, you can also install R and RStudio (for free) on your personal machines. To setup, you need the following:
+
+-   R downloaded from <https://cran.r-project.org/> compatible with your system
+-   Rstudio is **highly** recommended. RStudio is an Integrated Development Environment (IDE) for R. That means that Rstudio allows you to integrate the various features of R into one visual GUI environment.
+-   Latex installed on your system in order to use R Markdown (or now Quadro!). Quadro allows us to write pdf documents integrating mathematical equations, automatic code evaluations, plots!
+-   If you want to practice some R coding, you can find exercises here:\
+    <https://dvats.github.io/BasicRProblems/>
+
+## Introduction to GitHub
+
+We will be using GitHub every day for this course. A GitHub folder is called a *repository.* I will be sharing all worksheets on GitHub through a GitHub classroom link. That link makes a copy of the GitHub repository in your account, giving you complete access to all files shared.
+
+Please get comfortable with GitHub in the first month of the course. On your personal computer, I recommend installing [GitHub Desktop.](https://desktop.github.com/download/)
+
+## Some Coding Practices
+
+As we progress in this course, we want to make sure we develop good coding habits that will help us in the future
+
+-   [Don't be lazy!]{.underline}
+    -   Codinglanguagesarelikeanylanguage. Every object, operation, etc is a word and you must use "space" to make it easier to read.
+
+    -   Comment your code! See `starter.R` file for how I use comments in my code. That will help the reader understand you better.
+-   [Be organized]{.underline}
+    -   Don't save files randomly on your desktop. Make a folder for the course, and within that folder, make subfolders for every worksheet or task.
+
+    -   Pretty soon you'll be writing long complicated codes. Think about which codes should be in which files or folders.
+
+    -   Name files appropriately
+
+    -   Remember to push changes to GitHub when your work session is done.
+-   [Naming objects]{.underline}
+    -   Don't use `a`, `b`, `c`, etc only. Use variable names based on their purpose.
+
+    -   Assume that the next time you run your code, you have no idea what the code is supposed to do. That is, write the code for your future self.
+-   [Script vs Console]{.underline}
+    -   R has both an active console and a script.
+
+    -   The script is basically a text file that allows you to keep organize your working code. Make sure any script you write, can run in a different person's computer with a fresh R session.
+
+    -   The console is a place for you to run R code. Additionally, during the process of writing code, you can view your results as it comes along, debug your code, and keep a track of results.
+
+## Worksheet Problems
+
+1.  Carefully do the following steps
+
+    a.  Create a folder on your machine somewhere easily accessible called `MTH208`.
+
+    b.  Within that folder create a new folder `Worksheet1`.
+
+    c.  Go to your GitHub repository for this Worksheet, click on the green button, and select `Download Zip` option. Download the Zip to the `Worksheet1` folder created above.
+
+    d.  Right click on the zip file and click on extract files.
+
+    e.  Remember these sequence of steps. You will need to do this every time.
+
+2.  Carefully go through the code in file `starter.R` and run the code in RStudio.
+
+3.  Write a function in R to find $n!$. This function should have an argument `n` that can be used to call the function for a given integer. Verify your answer with `factorial()` function.
+
+4.  Euler's number, $e$, is accessed through exp(1) in R. Similarly $e^3$ is `exp(3)`. It is well known that $$ e = \lim_{n \to \infty}\left(1 + \dfrac{1}{n} \right)^n$$ Write a function in R that calculates the right hand side (without the limit) for a user-given value of $n$.
+
+5.  Load the seating dataset:
+
+    ```{r}
+    #| eval: false
+    seat <- read.csv("https://dvats.github.io/assets/course/mth208/seating.csv")
+    ```
+
+    Write R code to find your assigned seat using your roll number as reference.
+
+6.  The `seating.csv` dataset is also shared in the repository folder. Using `read.csv()` function, load the locally downloaded `seating.csv` into your R session. [You will need to make sure you set the working directory to the folder where the csv file is.]{.underline}
