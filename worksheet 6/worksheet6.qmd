@@ -1,0 +1,99 @@
+---
+title: "MTH208: Worksheet 6"
+format: 
+  pdf:
+    documentclass: article
+editor: visual
+geometry: margin=1in
+header-includes:
+   - \usepackage{amsmath, amssymb, setspace}
+   - \onehalfspacing
+   - \usepackage{etoolbox} 
+   - \makeatletter 
+   - \preto{\@verbatim}{\topsep=3pt \partopsep=3pt } 
+   - \makeatother
+---
+
+## Web Scraping
+
+In this worksheet, we will learn how to scrape the web. Scraping the web means that we can collect data that is online in a way that it can be stored in an organized way. We will need `R` package `rvest` for the scraping. Further, we will also learn some data handling with the combination of packages called `tidyverse`. (These packages have already been installed on your machines.)
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(rvest)
+```
+
+Our objective in the first task is to scrape the names of all the faculty in the Department of Mathematics and Statistics at IIT Kanpur.
+
+Function `read_html` goes to a website and reads and saves the html code of that website.
+
+```{r}
+#| eval: false
+html <- read_html("https://www.iitk.ac.in/math/faculty")
+
+```
+
+The complete html code for the website is saved in the object `html`. You may go to the website, view source code and see what the html code looks like.
+
+Since the goal is to extract all faculty's name, we go to the source code to find the first faculty's name: "ANAND A.":
+
+![](text_html.png){fig-align="left" width="500"}
+
+We see that it looks like all faculty's names are written in the `h3` tag with class being `head3`, and further in the hyperlink tag `a`. We can use function `html_elements()` to extract all instances of a particular kind of tag.
+
+```{r}
+#| eval: false
+# extracting all tags with class = head3. The
+# "." indicates class.
+name <- html_elements(html, ".head3")
+
+# From all the head3 class, extracting all link tags
+name <- html_elements(name, "a")
+
+# Extracting the text associated with the links
+name <- html_text(name)
+
+## A faster way
+name <- html_elements(html, ".head3 a")
+name <- html_text(name)
+```
+
+And we're done! Notice how we have to keep reassigning the value of `name` or find other variable names. This can be overcome by using "pipes" available in `tidyverse`. Using pipe `%>%` allows us to do a series of operations in one go. A pipe reads like "and then do.." The line below gives the same result as before!
+
+```{r}
+#| eval: false
+name <- html %>% html_elements(".head3 a") %>% html_text()
+```
+
+1.  Write an R program to obtain the list of post doctoral fellows in the Department of Mathematics and Statistics at IIT Kanpur.\
+
+2.  Write an R code to obtain the following information about the best 100 movies on Netflix right now (and store the information in a clean data.frame)
+
+    ```{r}
+    #| eval: false
+    html <- read_html("https://editorial.rottentomatoes.com/guide/best-netflix-movies-to-watch-right-now/")
+    ```
+
+    The website has the "100 best movies on Netflix" ranked by "Tomatometer". Scrape this website and collect the following information:
+
+    1.  Ranking
+
+    2.  Name of Movie
+
+    3.  Tomato % score
+
+    4.  Year of movie
+
+    5.  Director(s) of the movie
+
+    You may not be able to get a clean list of the movie names. Using functions `strsplit`, `substring`, `gsub`, `substr` (or any other methods) create a final data frame of the movies. The data frame must be created like:
+
+    ```{r}
+    #| eval: false
+    netflix_movies <- data.frame("Name" = name, "Year" = year, ...)
+    ```
+
+3.  Using `html_table` scrape the table of Women's Tennis Association ranking of players below, and produce a clean table of Rank, Name, Points, and age.
+
+    <https://www.espn.com/tenis/rankings/_/tipo/wta>

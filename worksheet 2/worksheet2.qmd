@@ -1,0 +1,77 @@
+---
+title: "MTH208: Worksheet 2"
+format: pdf
+editor: visual
+geometry: margin=1in
+header-includes:
+   - \usepackage{amsmath, amssymb, setspace}
+   - \onehalfspacing
+   - \usepackage{etoolbox} 
+   - \makeatletter 
+   - \preto{\@verbatim}{\topsep=3pt \partopsep=3pt } 
+   - \makeatother
+---
+
+\vspace{-2cm}
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(
+  strip.white = TRUE
+)
+```
+
+## Introduction to R cont...
+
+We have familiarized ourselves with some starter exercises in `R`. Now let's try to do some visual and exploratory analyses
+
+1.  Write a function in R to find $n!$. This function should have an argument `n` that can be used to call the function for a given integer. Verify your answer with `factorial()` function.
+
+2.  Euler's number, $e$, is accessed through exp(1) in R. Similarly $e^3$ is `exp(3)`. It is well known that $$ e = \lim_{n \to \infty}\left(1 + \dfrac{1}{n} \right)^n$$ Write a function in R that calculates the right hand side (without the limit) for a user-given value of $n$.
+
+3.  Load the seating dataset:
+
+    ```{r}
+    #| eval: false
+    seat <- read.csv("https://dvats.github.io/assets/course/mth208/seating.csv")
+    ```
+
+    Write R code to find your assigned seat using your roll number as reference.
+
+4.  The `seating.csv` dataset is also shared in the repository folder. Using `read.csv()` function, load the locally downloaded `seating.csv` into your R session. [You will need to make sure you set the working directory to the folder where the csv file is.\
+    ]{.underline}
+
+5.  Recall the seating chart for this course
+
+    ```{r}
+    #| eval: false
+    seat <- read.csv("https://dvats.github.io/assets/course/mth208/seating.csv")
+    ```
+
+    MSc students have 9-digit roll numbers and BS students have 6-digit roll numbers. Write `R` code to calculate the number of MSc students enrolled in this course, and the number of BS students enrolled in this course.
+
+6.  An "all-rounder" in cricket is a player who performs well in both batting and bowling. The dataset `battingbowling.csv` in your repository contains the batting and bowling ODI averages of selected male players. Load the dataset using the following command (remember that your working directory should be the directory that contains this file).
+
+    ```{r}
+    #| eval: false
+    cricket <- read.csv("battingbowling.csv")
+    ```
+
+    (A high batting average is good, a high bowling average is bad.) Let's say a decent batter is someone with a batting average higher than 25 and a decent bowler is someone with a bowling average below 40.
+
+    1.  Create a sub-dataset of all all-rounders using the above criterion.
+
+    2.  Which team has the most all-rounders?
+
+    3.  Which team has the least all-rounders.
+
+7.  The `plot()` function can be used to make a variety of plots in `R`. Do `?plot` on the console to learn how the syntax for plots works. Reproduce the following $y = x$ plot given below.
+
+    ```{r}
+    #| eval: true
+    #| echo: false
+    plot(0:1e1, 0:1e1, main = "Y = X Plot", xlab = "x", ylab = "y", type = 'l')
+    ```
+
+8.  For $n = 1, \dots, 1000$, make a plot of $n$ versus $f(n)$ where\
+    $$f(n) = \left(1 + \dfrac{1}{n}  \right)^{n} $$\
+    Using `abline()`, draw a horizontal line, in red, at the value $e$.
